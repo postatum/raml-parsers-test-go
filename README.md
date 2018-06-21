@@ -4,44 +4,46 @@ Simple test of few RAML Go parsers. Tests simply try to parse a set of examples 
 
 A fine collection of RAML files can be composed each containing one/few RAML features to test those in isolation.
 
-### Install
+### Install & run as bin
+
+```sh
+go install github.com/postatum/raml-parsers-test
+git clone git@github.com:raml-org/raml-examples.git raml_examples
+raml-parsers-test -parser PARSER_NAME -examples ./raml_examples
+```
+
+### Install & run raw code
 
 ```sh
 git clone git@github.com:postatum/raml-parsers-test.git
-cd raml-parsers-test
 git clone git@github.com:raml-org/raml-examples.git raml_examples
+cd raml-parsers-test
+go run *.go -parser PARSER_NAME -examples ../raml_examples
+
 ```
 
-*Optional:*
-Install package with `go install .` to run it as a binary `raml-parsers-test` instead of `go run *.go`.
-
-### Run
-
-Before running these you may need to fix import paths in `.go` files.
-
-```sh
-go run *.go -parser jumpscale
-go run *.go -parser goraml
-go run *.go -parser tsaikd
-```
-
-### Other options
+### Options
 
 Help:
 
 ```sh
-go run *.go -h
+raml-parsers-test -h
 ```
 
-Verbose output (prints errors):
-
+Parser (defaults to `jumpscale`):
 ```sh
-go run *.go -parser PARSER_NAME -verbose
+raml-parsers-test -parser jumpscale/goraml/tsaikd
 ```
 
-Using different examples folder:
+Verbose output (prints errors) (defaults to `false`):
 
 ```sh
-go run *.go -parser PARSER_NAME -examples ../some/folder/with_raml
+raml-parsers-test -parser PARSER_NAME
+```
+
+Examples folder (**required**):
+
+```sh
+raml-parsers-test -parser PARSER_NAME -examples ../some/folder/with_raml
 
 ```
