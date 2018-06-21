@@ -9,6 +9,9 @@ func main() {
 	parserFl := flag.String(
 		"parser", "jumpscale",
 		"Parser to test. Supported: jumpscale, goraml, tsaikd.")
+	examplesFl := flag.String(
+		"examples", "./raml_examples",
+		"Examples folder path")
 	verboseFl := flag.Bool(
 		"verbose", false,
 		"Verbose mode. Parsing errors will be printed.")
@@ -26,7 +29,7 @@ func main() {
 		return
 	}
 
-	fileList, err := ListRamls("./raml_examples")
+	fileList, err := ListRamls(*examplesFl)
 	if err != nil {
 		fmt.Printf("Failed to list RAML files: %s\n", err)
 		return
