@@ -17,6 +17,8 @@ Install package with `go install .` to run it as a binary `raml-parsers-test` in
 
 ### Run
 
+Before running these you may need to fix import paths in `.go` files.
+
 ```sh
 go run *.go -parser jumpscale
 go run *.go -parser goraml
