@@ -9,6 +9,7 @@ A fine collection of RAML files can be composed each containing one/few RAML fea
 ```sh
 git clone git@github.com:postatum/raml-parsers-test.git
 cd raml-parsers-test
+git clone git@github.com:raml-org/raml-examples.git raml_examples
 ```
 
 *Optional:*
