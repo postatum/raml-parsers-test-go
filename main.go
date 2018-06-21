@@ -21,7 +21,7 @@ func main() {
 	parsers := map[string]Parser{
 		"jumpscale": Jumpscale,
 		"goraml":    Goraml,
-		// ADD MORE
+		"tsaikd":    Tsaikd,
 	}
 	parser, ok := parsers[*parserFl]
 	if !ok {
