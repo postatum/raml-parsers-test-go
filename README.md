@@ -13,6 +13,16 @@ Simple test of few RAML Go parsers. Tests simply try to parse a set of examples 
 
 A fine collection of RAML files can be composed each containing one/few RAML features to test those in isolation.
 
+### Install
+
+```sh
+git clone git@github.com:postatum/raml-parsers-test.git
+cd raml-parsers-test
+```
+
+*Optional:*
+Install package with `go install .` to run it as a binary `raml-parsers-test` instead of `go run *.go`.
+
 ### Run
 
 ```sh
