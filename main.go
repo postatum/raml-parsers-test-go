@@ -17,6 +17,7 @@ func main() {
 	verbose := *verboseFl
 	parsers := map[string]Parser{
 		"jumpscale": Jumpscale,
+		"goraml":    Goraml,
 		// ADD MORE
 	}
 	parser, ok := parsers[*parserFl]
