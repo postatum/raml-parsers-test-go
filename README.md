@@ -1,12 +1,3 @@
-### TODO:
-
-* [x] Write test suite against built-in jumpscale examples
-* [x] Write test-suite for jumpscale/go-raml/raml
-* [x] Write test-suite for go-raml/raml
-* [ ] Write test-suite for tsaikd/go-raml-parser
-* [ ] Replace jumpscale examples with raml-org/raml-examples
-
-
 ### About
 
 Simple test of few RAML Go parsers. Tests simply try to parse a set of examples and report if parser returned an error.
