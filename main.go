@@ -43,12 +43,16 @@ func main() {
 
 	var result string
 	for _, fpath := range fileList {
+		fmt.Printf("> Parsing %s: ", fpath)
+		err, notPanic := parser(fpath)
+		if !notPanic {
+			continue
+		}
 		result = "OK"
-		err = parser(fpath)
 		if err != nil {
 			result = "FAIL"
 		}
-		fmt.Printf("> %s: %s\n", fpath, result)
+		fmt.Printf("%s\n", result)
 		if verbose && err != nil {
 			fmt.Println(err.Error())
 		}
