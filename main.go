@@ -40,8 +40,12 @@ func main() {
 		if !notPanic {
 			continue
 		}
+		failed := err != nil
+		if ShouldFail(fpath) {
+			failed = !failed
+		}
 		result = "OK"
-		if err != nil {
+		if failed {
 			result = "FAIL"
 		}
 		fmt.Printf("%s\n", result)

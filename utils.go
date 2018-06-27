@@ -33,3 +33,8 @@ func CloneTckRepo() string {
 	}
 	return fmt.Sprintf("%s/tests/raml-1.0", targetDir)
 }
+
+// ShouldFail reports whether parsing of RAML file should fail
+func ShouldFail(fpath string) bool {
+	return strings.Contains(fpath, "invalid")
+}
