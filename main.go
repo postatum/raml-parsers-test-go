@@ -9,9 +9,6 @@ func main() {
 	parserFl := flag.String(
 		"parser", "jumpscale",
 		"Parser to test. Supported: jumpscale, goraml, tsaikd.")
-	examplesFl := flag.String(
-		"examples", "",
-		"Examples folder path")
 	verboseFl := flag.Bool(
 		"verbose", false,
 		"Verbose mode. Parsing errors will be printed.")
@@ -29,13 +26,8 @@ func main() {
 		return
 	}
 
-	examples := *examplesFl
-	if examples == "" {
-		fmt.Println("Missing examples path param")
-		return
-	}
-
-	fileList, err := ListRamls(examples)
+	examplesFl := CloneTckRepo()
+	fileList, err := ListRamls(examplesFl)
 	if err != nil {
 		fmt.Printf("Failed to list RAML files: %s\n", err)
 		return

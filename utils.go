@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 )
@@ -16,4 +18,18 @@ func ListRamls(folderPath string) ([]string, error) {
 		return nil
 	})
 	return fileList, err
+}
+
+// CloneTckRepo clones raml-tck repo and returns cloned repo path
+func CloneTckRepo() string {
+	targetDir := fmt.Sprintf("%s/raml-tck", os.TempDir())
+	_ = os.RemoveAll(targetDir)
+	fmt.Printf("Cloning raml-tc repo to %s\n", targetDir)
+	gitRepo := "git@github.com:raml-org/raml-tck.git"
+	cmd := exec.Command("git", "clone", gitRepo, targetDir)
+	err := cmd.Run()
+	if err != nil {
+		panic(fmt.Sprintf("Failed to clone repo %s", gitRepo))
+	}
+	return fmt.Sprintf("%s/tests/raml-1.0", targetDir)
 }
