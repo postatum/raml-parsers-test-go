@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	jumpscale "github.com/Jumpscale/go-raml/raml"
+	jumpscale "github.com/postatum/go-raml/raml"
 	tsaikd "github.com/tsaikd/go-raml-parser/parser"
 	goraml "gopkg.in/raml.v0" // github.com/go-raml/raml
 )
