@@ -34,6 +34,7 @@ func main() {
 	}
 
 	var result string
+	passed := 0
 	for _, fpath := range fileList {
 		fmt.Printf("> Parsing %s: ", fpath)
 		err, notPanic := parser(fpath)
@@ -47,10 +48,13 @@ func main() {
 		result = "OK"
 		if failed {
 			result = "FAIL"
+		} else {
+			passed++
 		}
 		fmt.Printf("%s\n", result)
 		if verbose && err != nil {
 			fmt.Println(err.Error())
 		}
 	}
+	fmt.Printf("\nPassed/Total: %d/%d\n", passed, len(fileList))
 }
