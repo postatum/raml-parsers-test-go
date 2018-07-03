@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 )
@@ -44,6 +45,10 @@ func main() {
 		failed := err != nil
 		if ShouldFail(fpath) {
 			failed = !failed
+			if err == nil {
+				err = errors.New(
+					"Parsing expected to fail but succeeded")
+			}
 		}
 		result = "OK"
 		if failed {

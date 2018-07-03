@@ -36,5 +36,5 @@ func CloneTckRepo() string {
 
 // ShouldFail reports whether parsing of RAML file should fail
 func ShouldFail(fpath string) bool {
-	return strings.Contains(fpath, "invalid")
+	return strings.Contains(strings.ToLower(fpath), "invalid")
 }
