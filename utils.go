@@ -26,7 +26,8 @@ func CloneTckRepo() string {
 	_ = os.RemoveAll(targetDir)
 	fmt.Printf("Cloning raml-tc repo to %s\n", targetDir)
 	gitRepo := "git@github.com:raml-org/raml-tck.git"
-	cmd := exec.Command("git", "clone", gitRepo, targetDir)
+	cmd := exec.Command(
+		"git", "clone", "-b", "rename-cleanup", gitRepo, targetDir)
 	err := cmd.Run()
 	if err != nil {
 		panic(fmt.Sprintf("Failed to clone repo %s", gitRepo))
