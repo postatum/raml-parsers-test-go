@@ -1,23 +1,37 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 )
 
-// ListRamls lists RAML file in :folderPath: folder
+type manifest struct {
+	Description string   `json:"description"`
+	FilePaths   []string `json:"filePaths"`
+}
+
+// ListRamls lists RAML file in :folderPath: folder;
+// Uses raml-tck manifest.json file
 func ListRamls(folderPath string) ([]string, error) {
 	fileList := []string{}
-	err := filepath.Walk(folderPath, func(path string, f os.FileInfo, err error) error {
-		if strings.HasSuffix(path, ".raml") {
-			fileList = append(fileList, path)
-		}
-		return nil
-	})
-	return fileList, err
+	manifestPath := filepath.Join(folderPath, "manifest.json")
+	manifestFile, err := os.Open(manifestPath)
+	defer manifestFile.Close()
+	if err != nil {
+		return fileList, err
+	}
+	byteValue, _ := ioutil.ReadAll(manifestFile)
+	var m manifest
+	json.Unmarshal(byteValue, &m)
+	for _, fp := range m.FilePaths {
+		fileList = append(fileList, filepath.Join(folderPath, fp))
+	}
+	return fileList, nil
 }
 
 // CloneTckRepo clones raml-tck repo and returns cloned repo path
