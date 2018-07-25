@@ -35,15 +35,28 @@ func main() {
 	}
 
 	var result string
-	passed := 0
+	var shouldFail bool
+	var countKey string
+	count := map[string]map[string]int{
+		"valid":   {"passed": 0, "total": 0},
+		"invalid": {"passed": 0, "total": 0},
+	}
+
 	for _, fpath := range fileList {
 		fmt.Printf("> Parsing %s: ", fpath)
+		shouldFail = ShouldFail(fpath)
+		if shouldFail {
+			countKey = "invalid"
+		} else {
+			countKey = "valid"
+		}
+		count[countKey]["total"]++
 		err, notPanic := parser(fpath)
 		if !notPanic {
 			continue
 		}
 		failed := err != nil
-		if ShouldFail(fpath) {
+		if shouldFail {
 			failed = !failed
 			if err == nil {
 				err = errors.New(
@@ -54,12 +67,16 @@ func main() {
 		if failed {
 			result = "FAIL"
 		} else {
-			passed++
+			count[countKey]["passed"]++
 		}
 		fmt.Printf("%s\n", result)
 		if verbose && err != nil {
 			fmt.Println(err.Error())
 		}
 	}
-	fmt.Printf("\nPassed/Total: %d/%d\n", passed, len(fileList))
+	tmpl := "\nPassed/Total: %d/%d (valid: %d/%d, invalid: %d/%d)\n"
+	fmt.Printf(
+		tmpl, count["valid"]["passed"]+count["invalid"]["passed"], len(fileList),
+		count["valid"]["passed"], count["valid"]["total"],
+		count["invalid"]["passed"], count["invalid"]["total"])
 }
